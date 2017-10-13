@@ -1,3 +1,5 @@
+#ifndef ROBOT_H_
+#define ROBOT_H_
 #include "main.h"
 
 const char claw;
@@ -15,3 +17,4 @@ void armSetStage1(int power, bool immediate);
 void armSetStage2(int power, bool immediate);
 void armSetBothStages(int stage1, int stage2, bool immediate);
 void mogoSet(int power, bool immediate);
+#endif
