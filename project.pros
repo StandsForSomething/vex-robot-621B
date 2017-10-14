@@ -1,1 +1,1 @@
-{"py/object": "prosconfig.ProjectConfig", "py/state": {"kernel": "2.11.1", "libraries": {"libmtrmgr": "0.9.0"}, "output": "bin/output.bin"}}
+{"py/object": "prosconfig.ProjectConfig", "py/state": {"kernel": "2.11.1", "libraries": {"libfbc": "1.0.0", "libmtrmgr": "1.0.0"}, "output": "bin/output.bin"}}
