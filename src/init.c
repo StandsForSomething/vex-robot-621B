@@ -39,4 +39,6 @@ void initializeIO() {
 void initialize() {
 	motorManagerInit();
 	motorsInit();
+	encodersInit();
+	initFBCControllers();
 }
