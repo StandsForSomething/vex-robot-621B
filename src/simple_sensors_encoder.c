@@ -2,6 +2,9 @@
 #include "simple_sensors.h"
 #include "simple_sensors_encoder.h"
 
+encoderSimpleSensor *_encoders = NULL;
+size_t _encoders_len = 0;
+
 //a wrapper for getEncoderMode with the encoder's default encoderGetType.
 double _getEncoder(simpleSensor encoder) {
 	encoderSimpleSensor *encoderData = (encoderSimpleSensor *)encoder.sensorData;
@@ -12,36 +15,37 @@ bool initEncoder(simpleSensor *parent, int port2, motorGearing motorGearing,
 								 encoderType encoderType, encoderGetType encoderGetType,
 								 float gearRatio) {
 	//copy the encoder we wan to initialize to a temporary encoder
-	static encoderSimpleSensor tempEncoder;
 	struct sensorData *tempSensorData;
+	_encoders_len++;
+	_encoders = realloc( _encoders, _encoders_len * sizeof *_encoders);
 
-	tempEncoder.encoderType = encoderType;
+	_encoders[_encoders_len].encoderType = encoderType;
 	parent->sensorValue = &_getEncoder;
 
 	//this is the default value to be retrieved
-	tempEncoder.encoderGetType = encoderGetType;
+	_encoders[_encoders_len].encoderGetType = encoderGetType;
 
 	switch(motorGearing) {
 	case TORQUE: //default factory gearing
-		tempEncoder.ticksDivisor = 627.2;
-		tempEncoder.velocityDivisor = 39.2;
+		_encoders[_encoders_len].ticksDivisor = 627.2;
+		_encoders[_encoders_len].velocityDivisor = 39.2;
 		break;
 
 	case SPEED: //highspeed gearing
-		tempEncoder.ticksDivisor = 392;
-		tempEncoder.velocityDivisor = 24.5;
+		_encoders[_encoders_len].ticksDivisor = 392;
+		_encoders[_encoders_len].velocityDivisor = 24.5;
 		break;
 
 	case TURBO: //turbospeed gearing
-		tempEncoder.ticksDivisor = 261.333;
-		tempEncoder.velocityDivisor = 16.333;
+		_encoders[_encoders_len].ticksDivisor = 261.333;
+		_encoders[_encoders_len].velocityDivisor = 16.333;
 		break;
 	}
 
 	//if a two wire shaft encoder is being used.
 	if(encoderType == TWO_WIRE) {
-		tempEncoder.port2 = port2;
-		tempEncoder.shaftEncoder = encoderInit(parent->port, port2, false);
+		_encoders[_encoders_len].port2 = port2;
+		_encoders[_encoders_len].shaftEncoder = encoderInit(parent->port, port2, false);
 	}
 
 	//if a one wire shaft encoder is being used
@@ -50,7 +54,7 @@ bool initEncoder(simpleSensor *parent, int port2, motorGearing motorGearing,
 	}
 
 	//copy the temporary encoder to the real encoder.
-	tempSensorData = (struct sensorData *)&tempEncoder;
+	tempSensorData = (struct sensorData *)&_encoders[_encoders_len];
 	parent->sensorData = tempSensorData;
 }
 

@@ -29,6 +29,7 @@
 #include "mtrmgr.h"
 #include "fbc.h"
 #include "fbc_pid.h"
+#include "buttons.h"
 #include "simple_sensors.h"
 #include "simple_sensors_encoder.h"
 #include "robot.h"

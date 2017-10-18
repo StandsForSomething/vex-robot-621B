@@ -2,6 +2,11 @@
 #define ROBOT_H_
 #include "main.h"
 
+#define CLAW_OPEN true
+#define CLAW_CLOSE false
+#define ARM_1_BOTTOM 260
+#define ARM_2_BOTTOM -1160
+
 const char claw;
 const char mogoR;
 const char mogoL;
@@ -33,5 +38,6 @@ void armSetStage1(int power);
 void armSetStage2(int power);
 void armSetBothStages(int stage1, int stage2);
 void mogoSet(int power);
+void clawMove();
 void initFBCControllers();
 #endif
