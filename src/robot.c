@@ -14,7 +14,7 @@ simpleSensor autoSelect = {2, ANALOG, false};
 simpleSensor arm1Pot = {3, ANALOG, false};
 simpleSensor mogoPotL = {5, ANALOG, false};
 simpleSensor mogoPotR = {4, ANALOG, false};
-simpleSensor arm2Enc = {11, OTHER, true};
+simpleSensor arm2Enc = {11, OTHER, false};
 simpleSensor driveEncL = {8, OTHER, false};
 simpleSensor driveEncR = {6, OTHER, false};
 
@@ -37,7 +37,7 @@ void motorsInit() {
 	blrsMotorInit(LDrive, false, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(arm1R, false, 0.35, NULL);
 	blrsMotorInit(arm1L, true, 0.35, NULL);
-	blrsMotorInit(arm2, false, 2, NULL);
+	blrsMotorInit(arm2, true, 2, NULL);
 }
 
 void driveSet(int left, int right) {
