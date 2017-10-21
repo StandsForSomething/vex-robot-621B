@@ -8,8 +8,8 @@ int armPositions[13][2] = {
 //arm1 | arm2
 	{275,  -44},  //cone 1
 	{275,  -84},  //cone 2
-	{750,   20},  //cone 3
-	{660,   20},  //cone 4
+	{850,   20},  //cone 3
+	{1160,  20},  //cone 4
 	{925,   20},  //cone 5
 	{1100,  20},  //cone 6
 	{1130,  20},  //cone 7
@@ -25,6 +25,7 @@ void _autoStackTask(void *ignore) {
 	fbcSetGoal(&arm1FBC, armPositions[autoStackCone-1][0]);
 	print("[autoStack] waiting\n\r");
 	while((int)getSensor(arm1Pot) < arm1FBC.goal - ARM_2_START) {
+		printf("%d\n\r", (int)getSensor(arm1Pot));
 		delay(20);
 	}
 	print("[autoStack] setting arm2\n\r");
