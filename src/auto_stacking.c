@@ -2,6 +2,7 @@
 #define ARM_2_START 50
 
 TaskHandle autoStackTaskHandle = NULL;
+TaskHandle armReturnTaskHandle = NULL;
 char autoStackCone = 1;
 int armPositions[13][2] = {
 //arm1 | arm2
@@ -22,8 +23,8 @@ int armPositions[13][2] = {
 
 void _autoStackTask(void *ignore) {
 	fbcSetGoal(&arm1FBC, armPositions[autoStackCone-1][0]);
+	print("[autoStack] waiting\n\r");
 	while((int)getSensor(arm1Pot) < arm1FBC.goal - ARM_2_START) {
-		print("[autoStack] waiting\n\r");
 		delay(20);
 	}
 	print("[autoStack] setting arm2\n\r");
@@ -37,6 +38,17 @@ void _autoStackTask(void *ignore) {
 		fbcSetGoal(&arm2FBC, armPositions[12][1]);
 	}
 	autoStackCone++;
+}
+
+void _autoStackReturnTask(void *ignore) {
+	if(autoStackTaskHandle != NULL && taskGetState(autoStackTaskHandle) !=
+		 TASK_RUNNING) {
+		fbcSetGoal(&arm2FBC, ARM_2_BOTTOM);
+		while(!fbcIsConfident(&arm2FBC)) {
+			delay(20);
+		}
+		fbcSetGoal(&arm1FBC, ARM_1_BOTTOM);
+	}
 }
 
 void autoStack() {
@@ -53,9 +65,19 @@ void autoStack() {
 	}
 }
 
+void returnArm() {
+	if(armReturnTaskHandle == NULL ||
+		 taskGetState(armReturnTaskHandle) != TASK_RUNNING) {
+		armReturnTaskHandle = taskCreate(&_autoStackReturnTask,
+																		 TASK_DEFAULT_STACK_SIZE, NULL,
+																		 TASK_PRIORITY_DEFAULT);
+	}
+}
+
 void cancelStack() {
 	print("[autoStack] stopping task\n\r");
 	taskDelete(autoStackTaskHandle);
+	taskDelete(armReturnTaskHandle);
 	fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot));
 	fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc));
 }

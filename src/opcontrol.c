@@ -40,7 +40,14 @@ void operatorControl() {
 			}
 
 			else if(buttonIsNewPress(JOY1_6D)) {
-				cancelStack();
+				if(autoStackTaskHandle != NULL &&
+					 taskGetState(autoStackTaskHandle) == TASK_RUNNING) {
+					cancelStack();
+				}
+
+				else {
+					returnArm();
+				}
 			}
 
 			if(buttonIsNewPress(JOY1_5U)) {
