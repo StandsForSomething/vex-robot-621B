@@ -32,6 +32,7 @@
 #include "buttons.h"
 #include "simple_sensors.h"
 #include "simple_sensors_encoder.h"
+#include "auto_stacking.h"
 #include "robot.h"
 
 // Allow usage of this file in C++ programs

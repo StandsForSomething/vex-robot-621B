@@ -31,32 +31,61 @@
  */
 
 void operatorControl() {
+	bool autoStacking = true;
+
 	while (1) {
+		if(autoStacking) {
+			if(buttonIsNewPress(JOY1_6U)) {
+					autoStack();
+			}
 
-		if(buttonGetState(JOY1_5U)) {
-			fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) + 800);
+			else if(buttonIsNewPress(JOY1_6D)) {
+				cancelStack();
+			}
+
+			if(buttonIsNewPress(JOY1_5U)) {
+				autoStackCone++;
+			}
+
+			else if(buttonIsNewPress(JOY1_5D)) {
+				autoStackCone--;
+			}
+
+			if(buttonIsNewPress(JOY1_7U)) {
+				autoStacking = false;
+			}
 		}
 
-		else if(buttonGetState(JOY1_5D)) {
-			fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 500);
+		else {
+			if(buttonGetState(JOY1_5U)) {
+				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) + 300);
+			}
+
+			else if(buttonGetState(JOY1_5D)) {
+				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 150);
+			}
+
+			if(arm1FBC.goal < ARM_1_BOTTOM) {
+				fbcSetGoal(&arm1FBC, ARM_1_BOTTOM);
+			}
+
+			if(buttonGetState(JOY1_6U)) {
+				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) + 200);
+			}
+
+			if(buttonGetState(JOY1_6D)) {
+				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) - 200);
+			}
+
+			if(arm2FBC.goal < ARM_2_BOTTOM) {
+				fbcSetGoal(&arm2FBC, ARM_2_BOTTOM);
+			}
+
+			if(buttonIsNewPress(JOY1_7U)) {
+				autoStacking = true;
+			}
 		}
 
-		if(arm1FBC.goal < ARM_1_BOTTOM) {
-			fbcSetGoal(&arm1FBC, ARM_1_BOTTOM);
-		}
-
-		if(buttonGetState(JOY1_6U)) {
-			fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) + 200);
-		}
-
-		if(buttonGetState(JOY1_6D)) {
-			fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) - 200);
-		}
-
-		if(arm2FBC.goal < ARM_2_BOTTOM) {
-			fbcSetGoal(&arm2FBC, ARM_2_BOTTOM);
-		}
-		
 		if(buttonIsNewPress(JOY1_8U)) {
 			clawMove();
 		}
@@ -66,7 +95,6 @@ void operatorControl() {
 		driveSet(joystickGetAnalog(1, 3) + joystickGetAnalog(1,4),
 						 joystickGetAnalog(1, 3) - joystickGetAnalog(1,4));
 
-		}
 		delay(20);
 	}
 }
