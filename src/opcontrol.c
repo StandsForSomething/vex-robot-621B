@@ -35,6 +35,7 @@ void operatorControl() {
 
 	while (1) {
 		if(autoStacking) {
+
 			if(buttonIsNewPress(JOY1_6U)) {
 					autoStack();
 			}
@@ -50,11 +51,11 @@ void operatorControl() {
 				}
 			}
 
-			if(buttonIsNewPress(JOY1_5U)) {
+			if(buttonIsNewPress(JOY1_7L) && autoStackCone < 12) {
 				autoStackCone++;
 			}
 
-			else if(buttonIsNewPress(JOY1_5D)) {
+			else if(buttonIsNewPress(JOY1_7D) && autoStackCone > 1) {
 				autoStackCone--;
 			}
 

@@ -77,8 +77,15 @@ void returnArm() {
 
 void cancelStack() {
 	print("[autoStack] stopping task\n\r");
-	taskDelete(autoStackTaskHandle);
-	taskDelete(armReturnTaskHandle);
+	if(autoStackTaskHandle != NULL &&
+		 taskGetState(autoStackTaskHandle) == TASK_RUNNING) {
+		taskDelete(autoStackTaskHandle);
+	}
+
+	if(armReturnTaskHandle != NULL &&
+		 taskGetState(armReturnTaskHandle) == TASK_RUNNING) {
+		taskDelete(armReturnTaskHandle);
+	}
 	fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot));
 	fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc));
 }
