@@ -32,7 +32,8 @@
 
 void operatorControl() {
 	bool autoStacking = true;
-
+	bool arm2ChangeGoal = false;
+	
 	while (1) {
 		if(autoStacking) {
 
@@ -70,20 +71,30 @@ void operatorControl() {
 			}
 
 			else if(buttonGetState(JOY1_5D)) {
-				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 150);
+				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 25);
 			}
 
 			if(arm1FBC.goal < ARM_1_BOTTOM) {
 				fbcSetGoal(&arm1FBC, ARM_1_BOTTOM);
 			}
 
-			if(buttonGetState(JOY1_6U)) {
-				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) + 200);
+			else if(arm1FBC.goal > ARM_1_TOP) {
+				fbcSetGoal(&arm1FBC, ARM_1_TOP);
 			}
 
-			if(buttonGetState(JOY1_6D)) {
-				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) - 200);
+			if(buttonGetState(JOY1_6U)) {
+				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) + 200);
+				arm2ChangeGoal = true;
 			}
+
+			else if(buttonGetState(JOY1_6D)) {
+				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) - 200);
+				arm2ChangeGoal = true;
+			}
+
+			else if(arm2ChangeGoal) {
+				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc));
+				arm2ChangeGoal = false;
 
 			if(arm2FBC.goal < ARM_2_BOTTOM) {
 				fbcSetGoal(&arm2FBC, ARM_2_BOTTOM);
