@@ -98,9 +98,9 @@ int _arm2Sense() {
 	return (int)getSensor(arm2Enc);
 }
 void initFBCControllers() {
-	fbcInit(&arm1FBC, &armSetStage1, &_arm1Sense, NULL, NULL, -1, 1, 250, 15);
-	fbcInit(&arm2FBC, &armSetStage2, &_arm2Sense, NULL, NULL, -1, 1, 5, 10);
-	fbcPIDInitializeData(&arm1PID, 0.2, 0, 10, 0, 0);
+	fbcInit(&arm1FBC, &armSetStage1, &_arm1Sense, &fbcStallDetect, NULL, -1, 1, 15, 50);
+	fbcInit(&arm2FBC, &armSetStage2, &_arm2Sense, &fbcStallDetect, NULL, -1, 1, 5, 10);
+	fbcPIDInitializeData(&arm1PID, 0.3, 0, 80, 0, 0);
 	fbcPIDInitializeData(&arm2PID, 0.7, 0, 0, 0, 0);
 	fbcPIDInit(&arm1FBC, &arm1PID);
 	fbcPIDInit(&arm2FBC, &arm2PID);

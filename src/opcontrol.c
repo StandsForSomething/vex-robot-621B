@@ -33,10 +33,8 @@
 void operatorControl() {
 	bool autoStacking = false;
 	bool arm2ChangeGoal = false;
-	
 	while (1) {
 		if(autoStacking) {
-
 			if(buttonIsNewPress(JOY1_6U)) {
 					autoStack();
 			}
