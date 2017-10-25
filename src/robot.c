@@ -31,12 +31,21 @@ void encodersInit() {
 
 void motorsInit() {
 	blrsMotorInit(claw, true, DEFAULT_SLEW_RATE, NULL);
+<<<<<<< HEAD
 	blrsMotorInit(mogoR, true, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(mogoL, false, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(RDrive, true, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(LDrive, false, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(arm1R, false, 0.35, NULL);
 	blrsMotorInit(arm1L, true, 0.35, NULL);
+=======
+	blrsMotorInit(mogo, true, DEFAULT_SLEW_RATE, NULL);
+	blrsMotorInit(RDrive2, true, DEFAULT_SLEW_RATE, NULL);
+	blrsMotorInit(RDrive1, true, DEFAULT_SLEW_RATE, NULL);
+	blrsMotorInit(LDrive1, false, DEFAULT_SLEW_RATE, NULL);
+	blrsMotorInit(LDrive2, false, DEFAULT_SLEW_RATE, NULL);
+	blrsMotorInit(arm1, true, 0.35, NULL);
+>>>>>>> 4a64943... try to do things to prevent gear skippings
 	blrsMotorInit(arm2, true, 2, NULL);
 }
 
@@ -46,8 +55,12 @@ void driveSet(int left, int right) {
 }
 
 void armSetStage1(int power) {
+<<<<<<< HEAD
 	blrsMotorSet(arm1L, power, false);
 	blrsMotorSet(arm1R, power, false);
+=======
+		blrsMotorSet(arm1, power, true);
+>>>>>>> 4a64943... try to do things to prevent gear skippings
 }
 
 void armSetStage2(int power) {
@@ -98,9 +111,9 @@ int _arm2Sense() {
 	return (int)getSensor(arm2Enc);
 }
 void initFBCControllers() {
-	fbcInit(&arm1FBC, &armSetStage1, &_arm1Sense, &fbcStallDetect, NULL, -1, 1, 15, 50);
-	fbcInit(&arm2FBC, &armSetStage2, &_arm2Sense, &fbcStallDetect, NULL, -1, 1, 5, 10);
-	fbcPIDInitializeData(&arm1PID, 0.3, 0, 80, 0, 0);
+	fbcInit(&arm1FBC, &armSetStage1, &_arm1Sense, NULL, NULL, -1, 1, 250, 15);
+	fbcInit(&arm2FBC, &armSetStage2, &_arm2Sense, NULL, NULL, -1, 1, 5, 10);
+	fbcPIDInitializeData(&arm1PID, 0.2, 0, 10, 0, 0);
 	fbcPIDInitializeData(&arm2PID, 0.7, 0, 0, 0, 0);
 	fbcPIDInit(&arm1FBC, &arm1PID);
 	fbcPIDInit(&arm2FBC, &arm2PID);
