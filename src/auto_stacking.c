@@ -1,5 +1,5 @@
 #include "main.h"
-#define ARM_2_START 230
+#define ARM_2_START 450
 
 TaskHandle autoStackTaskHandle = NULL;
 TaskHandle armReturnTaskHandle = NULL;
@@ -10,14 +10,14 @@ int armPositions[13][2] = {
 	{275,  -84},  //cone 2
 	{950,   30},  //cone 3
 	{1160,  30},  //cone 4
-	{975,   30},  //cone 5
-	{1150,  30},  //cone 6
-	{1150,  30},  //cone 7
-	{1460, -52},  //cone 8
-	{1475, -85},  //come 9
-	{1600, -86},  //cone 10
-	{1815, -70},  //cone 11
-	{2363, -430}, //cone 12 (step one)
+	{1075,  30},  //cone 5
+	{1250,  30},  //cone 6
+	{1350,  30},  //cone 7
+	{1560, -52},  //cone 8
+	{1625, -85},  //come 9
+	{1800, -86},  //cone 10
+	{1115, -70},  //cone 11
+	{2463, -430}, //cone 12 (step one)
 	{2055, -430}, //cone 12 (step two)
 };
 
