@@ -31,21 +31,12 @@ void encodersInit() {
 
 void motorsInit() {
 	blrsMotorInit(claw, true, DEFAULT_SLEW_RATE, NULL);
-<<<<<<< HEAD
 	blrsMotorInit(mogoR, true, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(mogoL, false, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(RDrive, true, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(LDrive, false, DEFAULT_SLEW_RATE, NULL);
 	blrsMotorInit(arm1R, false, 0.35, NULL);
 	blrsMotorInit(arm1L, true, 0.35, NULL);
-=======
-	blrsMotorInit(mogo, true, DEFAULT_SLEW_RATE, NULL);
-	blrsMotorInit(RDrive2, true, DEFAULT_SLEW_RATE, NULL);
-	blrsMotorInit(RDrive1, true, DEFAULT_SLEW_RATE, NULL);
-	blrsMotorInit(LDrive1, false, DEFAULT_SLEW_RATE, NULL);
-	blrsMotorInit(LDrive2, false, DEFAULT_SLEW_RATE, NULL);
-	blrsMotorInit(arm1, true, 0.35, NULL);
->>>>>>> 4a64943... try to do things to prevent gear skippings
 	blrsMotorInit(arm2, true, 2, NULL);
 }
 
@@ -55,12 +46,8 @@ void driveSet(int left, int right) {
 }
 
 void armSetStage1(int power) {
-<<<<<<< HEAD
 	blrsMotorSet(arm1L, power, false);
 	blrsMotorSet(arm1R, power, false);
-=======
-		blrsMotorSet(arm1, power, true);
->>>>>>> 4a64943... try to do things to prevent gear skippings
 }
 
 void armSetStage2(int power) {
