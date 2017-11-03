@@ -89,6 +89,10 @@ void operatorControl() {
 				fbcSetGoal(&arm2FBC, (int)getSensor(arm2Enc) - 200);
 			}
 
+			if(arm2FBC.goal < ARM_2_BOTTOM) {
+				fbcSetGoal(&arm2FBC, ARM_2_BOTTOM);
+			}
+
 			if(buttonIsNewPress(JOY1_7U)) {
 				autoStacking = true;
 			}

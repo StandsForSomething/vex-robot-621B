@@ -4,12 +4,12 @@
 
 #define CLAW_OPEN true
 #define CLAW_CLOSE false
-#define ARM_1_LOWER_P 1600
-#define ARM_1_BOTTOM 330
+#define ARM_1_BOTTOM -980
 #define ARM_1_TOP 2300
 #define ARM_2_BOTTOM -1160
 #define ARM_1_HIGH 0 //value TBD
 #define ARM_2_HIGH 0 //value TBD
+#define ARM_1_LOWER_P 1600
 
 const char claw;
 const char mogoR;
