@@ -67,7 +67,7 @@ void mogoSet(int power) {
 void clawMove() {
 	static bool open = true;
 	if(!open) {
-		blrsMotorSet(claw, -80, true);
+		blrsMotorSet(claw, -65, true);
 		open = true;
 	}
 
@@ -105,3 +105,5 @@ void initFBCControllers() {
 	fbcPIDInit(&arm1FBC, &arm1PID);
 	fbcPIDInit(&arm2FBC, &arm2PID);
 }
+
+
