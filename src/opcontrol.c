@@ -70,7 +70,7 @@ void operatorControl() {
 			}
 
 			else if(buttonGetState(JOY1_5D)) {
-				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 150);
+				fbcSetGoal(&arm1FBC, (int)getSensor(arm1Pot) - 215);
 			}
 
 			if(arm1FBC.goal < ARM_1_BOTTOM) {
