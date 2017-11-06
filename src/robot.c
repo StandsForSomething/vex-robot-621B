@@ -65,7 +65,7 @@ void mogoSet(int power) {
 }
 
 void clawMove() {
-	static bool open = true;
+	static bool open = false;
 	if(!open) {
 		blrsMotorSet(claw, -65, true);
 		open = true;
